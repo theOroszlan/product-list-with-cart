@@ -223,12 +223,20 @@ button {
 }
 
 .cart-empty {
-  display: none;
+  display: grid;
   place-items: center;
   gap: 1rem;
 }
 
-.cart-details,
+.cart.filled-cart .cart-empty {
+  display: none;
+}
+
+.cart-details {
+  display: none;
+}
+
+.cart.filled-cart .cart-details,
 .cart-items {
   display: grid;
   gap: 1rem;
