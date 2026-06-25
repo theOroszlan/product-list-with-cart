@@ -52,6 +52,7 @@ body {
 main {
   display: grid;
   place-items: center;
+  gap: 2rem;
   padding: 2rem;
 
   min-width: 375px;
@@ -204,6 +205,23 @@ button {
 .quantity-value {
   color: var(--rose-100);
   font-weight: var(--weight-600);
+}
+
+/* ========================
+        CART
+  ========================*/
+
+.cart {
+  background-color: #fff;
+  color: var(--red);
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.cart-empty {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
 }
 
 .attribution {
