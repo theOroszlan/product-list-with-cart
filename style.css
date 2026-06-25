@@ -47,6 +47,8 @@
 body {
   font-family: "Red Hat Text", sans-serif;
   background-color: var(--rose-50);
+
+  container-type: inline-size;
 }
 
 main {
@@ -214,8 +216,10 @@ button {
 .cart {
   background-color: #fff;
   color: var(--red);
-  width: 100%;
+  width: min(100%, 350px);
   padding: 1.5rem;
+
+  justify-self: start;
 }
 
 .cart-title {
@@ -357,10 +361,21 @@ button {
   }
 }
 
+/*=================
+      FOOTER
+  ===============*/
 .attribution {
   font-size: 0.6875rem;
   text-align: center;
 }
 .attribution a {
   color: hsl(228, 45%, 44%);
+}
+
+@container (width > 848px) {
+  main {
+    grid-template-columns: 1fr min(32vw, 350px);
+    align-items: start;
+    padding-inline: 5vw;
+  }
 }
