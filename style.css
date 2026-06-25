@@ -218,10 +218,135 @@ button {
   padding: 1.5rem;
 }
 
+.cart-title {
+  margin-block-end: 1rem;
+}
+
 .cart-empty {
-  display: grid;
+  display: none;
   place-items: center;
   gap: 1rem;
+}
+
+.cart-details,
+.cart-items {
+  display: grid;
+  gap: 1rem;
+}
+
+.cart-items {
+  padding: 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: 0.5rem;
+  border-block-end: 1px solid hsla(12, 20%, 44%, 0.2);
+}
+
+.cart-item-name {
+  color: var(--rose-500);
+  font-size: 1rem;
+}
+
+.cart-item-details > div {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.cart-item-quantity {
+  font-weight: var(--weight-600);
+}
+
+.cart-item-price {
+  color: var(--rose-500);
+}
+
+.cart-item-total-price {
+  font-weight: var(--weight-600);
+  color: var(--rose-500);
+}
+
+.cart-remove-item {
+  display: grid;
+
+  background: none;
+  color: var(--rose-500);
+  border: 1px solid var(--rose-500);
+  border-radius: 50%;
+  padding: 3px;
+
+  transition: transform ease 0.2s;
+
+  &:focus-visible {
+    border-color: var(--green);
+    color: var(--green);
+    transform: scale(1.1);
+  }
+
+  &:hover {
+    transform: scale(1.3);
+  }
+
+  &:active {
+    color: var(--rose-900);
+    border-color: var(--rose-900);
+  }
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-total > p:first-child {
+  color: var(--rose-500);
+}
+
+.order-total-price {
+  color: var(--rose-900);
+  font-size: 1.25rem;
+  font-weight: var(--weight-600);
+}
+
+.carbon-neutral {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+
+  background-color: var(--rose-100);
+  color: var(--rose-500);
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.carbon-neutral-text span {
+  color: var(--rose-900);
+  font-weight: var(--weight-600);
+}
+
+.order-btn {
+  background-color: var(--red);
+  color: var(--rose-50);
+  font-size: 1rem;
+  padding-block: 1rem;
+  border: none;
+  border-radius: 2rem;
+
+  &:focus-visible {
+    background-color: var(--green);
+  }
+
+  &:hover {
+    background-color: var(--rose-500);
+  }
+
+  &:active {
+    background-color: hsl(14, 86%, 28%);
+  }
 }
 
 .attribution {
