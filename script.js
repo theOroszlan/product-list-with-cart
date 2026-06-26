@@ -108,3 +108,47 @@ const loadProducts = async () => {
   displayProducts(products);
 };
 loadProducts();
+
+productsContainer.addEventListener("click", (e) => {
+  const addToCartBtn = e.target.closest(".add-to-cart");
+  const decreaseQuantityBtn = e.target.closest(".decrement-quantity-btn");
+  const increaseQuantityBtn = e.target.closest(".increment-quantity-btn");
+
+  if (addToCartBtn) {
+    const productCard = addToCartBtn.closest(".product");
+    const quantityEl = productCard.querySelector(".quantity-value");
+    const decrementBtn = productCard.querySelector(".decrement-quantity-btn");
+
+    productCard.classList.add("selected");
+    quantityEl.textContent = 1;
+    decrementBtn.focus();
+    return;
+  }
+
+  if (decreaseQuantityBtn) {
+    const productCard = decreaseQuantityBtn.closest(".product");
+    const quantityEl = productCard.querySelector(".quantity-value");
+    const addToCartEl = productCard.querySelector(".add-to-cart");
+    let productQuantity = Number(quantityEl.textContent);
+
+    if (productQuantity <= 1) {
+      productCard.classList.remove("selected");
+      productQuantity = 0;
+      addToCartEl.focus();
+    } else {
+      productQuantity--;
+    }
+    quantityEl.textContent = productQuantity;
+    return;
+  }
+
+  if (increaseQuantityBtn) {
+    const productCard = increaseQuantityBtn.closest(".product");
+    const quantityEl = productCard.querySelector(".quantity-value");
+    let productQuantity = Number(quantityEl.textContent);
+
+    productQuantity++;
+    quantityEl.textContent = productQuantity;
+    return;
+  }
+});
