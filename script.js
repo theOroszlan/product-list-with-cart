@@ -105,32 +105,33 @@ const updateCart = () => {
 
     itemEl.innerHTML = `
         <div class="cart-item-details">
-                <h3 class="cart-item-name">${item.name}</h3>
-                <div>
-                  <span class="cart-item-quantity">${item.qty}x</span>
-                  <span class="cart-item-price">@$${item.price.toFixed(2)}</span>
-                  <span class="cart-item-total-price">${item.totalPrice.toFixed(2)}</span>
-                </div>
-              </div>
-              <button
-                aria-label="Remove ${item.name} from cart"
-                class="cart-remove-item"
-              >
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="10"
-                  fill="none"
-                  viewBox="0 0 10 10"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
-                  />
-                </svg>
-              </button>`;
+            <h3 class="cart-item-name">${item.name}</h3>
+            <div>
+                <span class="cart-item-quantity">${item.qty}x</span>
+                <span class="cart-item-price">@$${item.price.toFixed(2)}</span>
+                <span class="cart-item-total-price">${item.totalPrice.toFixed(2)}</span>
+            </div>
+        </div>
+        <button
+        data-name="${item.name}"
+        aria-label="Remove ${item.name} from cart"
+        class="cart-remove-item"
+        >
+        <svg
+            aria-hidden="true"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            fill="none"
+            viewBox="0 0 10 10"
+        >
+            <path
+            fill="currentColor"
+            d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
+            />
+        </svg>
+        </button>`;
 
     cartItemsEl.appendChild(itemEl);
   });
@@ -242,6 +243,7 @@ const loadProducts = async () => {
 };
 loadProducts();
 
+// EVENT HANDLING
 productsContainer.addEventListener("click", (e) => {
   const addToCartBtn = e.target.closest(".add-to-cart");
   const decreaseBtn = e.target.closest(".decrement-quantity-btn");
@@ -294,6 +296,24 @@ productsContainer.addEventListener("click", (e) => {
     const item = getCartItem(productName);
     quantityEl.textContent = item.qty;
     updateCart();
+    return;
+  }
+});
+
+cartSection.addEventListener("click", (e) => {
+  const removeItemBtn = e.target.closest(".cart-remove-item");
+
+  if (removeItemBtn) {
+    const itemName = removeItemBtn.dataset.name;
+    const productCard = document.querySelector(`[data-name="${itemName}"]`);
+
+    cart.removeItem(itemName);
+    productCard.classList.remove("selected");
+    updateCart();
+    if (cart.items.length <= 0) {
+      cartSection.classList.remove("filled-cart");
+    }
+
     return;
   }
 });
