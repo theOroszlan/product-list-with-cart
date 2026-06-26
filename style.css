@@ -111,7 +111,7 @@ button {
   border-radius: 0.5rem;
 }
 
-.selected > .product-image {
+.selected .product-image {
   border: 3px solid var(--red);
 }
 
