@@ -7,6 +7,14 @@ const setProducts = (data) => {
   products = data;
 };
 
+const getProductCard = (childEl) => {
+  return childEl.closest(".product");
+};
+
+const getQuantityEl = (card) => {
+  return card.querySelector(".quantity-value");
+};
+
 const displayProducts = (products) => {
   productsContainer.innerHTML = "";
 
@@ -111,12 +119,12 @@ loadProducts();
 
 productsContainer.addEventListener("click", (e) => {
   const addToCartBtn = e.target.closest(".add-to-cart");
-  const decreaseQuantityBtn = e.target.closest(".decrement-quantity-btn");
-  const increaseQuantityBtn = e.target.closest(".increment-quantity-btn");
+  const decreaseBtn = e.target.closest(".decrement-quantity-btn");
+  const increaseBtn = e.target.closest(".increment-quantity-btn");
 
   if (addToCartBtn) {
-    const productCard = addToCartBtn.closest(".product");
-    const quantityEl = productCard.querySelector(".quantity-value");
+    const productCard = getProductCard(addToCartBtn);
+    const quantityEl = getQuantityEl(productCard);
     const decrementBtn = productCard.querySelector(".decrement-quantity-btn");
 
     productCard.classList.add("selected");
@@ -125,30 +133,30 @@ productsContainer.addEventListener("click", (e) => {
     return;
   }
 
-  if (decreaseQuantityBtn) {
-    const productCard = decreaseQuantityBtn.closest(".product");
-    const quantityEl = productCard.querySelector(".quantity-value");
+  if (decreaseBtn) {
+    const productCard = getProductCard(decreaseBtn);
+    const quantityEl = getQuantityEl(productCard);
     const addToCartEl = productCard.querySelector(".add-to-cart");
-    let productQuantity = Number(quantityEl.textContent);
+    let quantity = Number(quantityEl.textContent);
 
-    if (productQuantity <= 1) {
+    if (quantity <= 1) {
       productCard.classList.remove("selected");
-      productQuantity = 0;
+      quantity = 0;
       addToCartEl.focus();
     } else {
-      productQuantity--;
+      quantity--;
     }
-    quantityEl.textContent = productQuantity;
+    quantityEl.textContent = quantity;
     return;
   }
 
-  if (increaseQuantityBtn) {
-    const productCard = increaseQuantityBtn.closest(".product");
-    const quantityEl = productCard.querySelector(".quantity-value");
-    let productQuantity = Number(quantityEl.textContent);
+  if (increaseBtn) {
+    const productCard = getProductCard(increaseBtn);
+    const quantityEl = getQuantityEl(productCard);
+    let quantity = Number(quantityEl.textContent);
 
-    productQuantity++;
-    quantityEl.textContent = productQuantity;
+    quantity++;
+    quantityEl.textContent = quantity;
     return;
   }
 });
