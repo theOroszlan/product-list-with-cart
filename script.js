@@ -88,6 +88,10 @@ const getQuantityEl = (card) => {
   return card.querySelector(".quantity-value");
 };
 
+const getCartItem = (itemName) => {
+  return cart.items.find((item) => item.name === itemName);
+};
+
 const updateCart = () => {
   const items = cart.items;
   const total = cart.calculateTotalPrice();
@@ -267,7 +271,7 @@ productsContainer.addEventListener("click", (e) => {
     const productName = productCard.dataset.name;
 
     cart.updateQuantity(productName);
-    let item = cart.items.find((i) => i.name === productName);
+    let item = getCartItem(productName);
     if (!item) {
       productCard.classList.remove("selected");
       addToCartEl.focus();
@@ -287,7 +291,7 @@ productsContainer.addEventListener("click", (e) => {
     const productName = productCard.dataset.name;
 
     cart.addItem(productName);
-    const item = cart.items.find((i) => i.name === productName);
+    const item = getCartItem(productName);
     quantityEl.textContent = item.qty;
     updateCart();
     return;
