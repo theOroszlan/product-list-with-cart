@@ -350,16 +350,21 @@ button {
   border: none;
   border-radius: 2rem;
 
+  transition:
+    background-color ease 0.2s,
+    transform ease 0.2s;
   &:focus-visible {
     background-color: var(--green);
   }
 
   &:hover {
-    background-color: var(--rose-500);
+    background-color: hsl(14, 86%, 36%);
+    transform: translateY(-1px);
   }
 
   &:active {
     background-color: hsl(14, 86%, 28%);
+    transform: translateY(0);
   }
 }
 
