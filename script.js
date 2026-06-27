@@ -306,9 +306,11 @@ cartSection.addEventListener("click", (e) => {
   if (removeItemBtn) {
     const itemId = Number(removeItemBtn.dataset.id);
     const productCard = document.querySelector(`[data-id="${itemId}"]`);
+    const quantityEl = getQuantityEl(productCard);
 
     cart.removeItem(itemId);
     productCard.classList.remove("selected");
+    quantityEl.textContent = 0;
     updateCart();
     if (cart.items.length <= 0) {
       cartSection.classList.remove("filled-cart");
