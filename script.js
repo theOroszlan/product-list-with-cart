@@ -13,22 +13,22 @@ class Cart {
     this.items = [];
   }
 
-  removeItem = (name) => {
-    let index = this.items.findIndex((item) => item.name === name);
+  removeItem = (id) => {
+    let index = this.items.findIndex((item) => item.id === id);
 
     if (index === -1) return;
 
     this.items.splice(index, 1);
   };
 
-  addItem = (name) => {
-    let item = this.items.find((item) => item.name === name);
-
+  addItem = (id) => {
+    let item = this.items.find((item) => item.id === id);
     if (!item) {
-      const product = products.find((item) => item.name === name);
+      const product = products.find((prod) => prod.id === id);
       const price = product.price;
       item = {
-        name,
+        id,
+        name: product.name,
         price,
         qty: 1,
         totalPrice: price,
@@ -42,15 +42,15 @@ class Cart {
     item.totalPrice = item.qty * item.price;
   };
 
-  updateQuantity = (name) => {
-    let item = this.items.find((item) => item.name === name);
+  updateQuantity = (id) => {
+    let item = this.items.find((item) => item.id === id);
 
     if (!item) return;
 
     item.qty -= 1;
     item.totalPrice = item.qty * item.price;
     if (item.qty <= 0) {
-      this.removeItem(name);
+      this.removeItem(id);
     }
   };
 
@@ -88,8 +88,8 @@ const getQuantityEl = (card) => {
   return card.querySelector(".quantity-value");
 };
 
-const getCartItem = (itemName) => {
-  return cart.items.find((item) => item.name === itemName);
+const getCartItem = (id) => {
+  return cart.items.find((item) => item.id === id);
 };
 
 const updateCart = () => {
@@ -113,7 +113,7 @@ const updateCart = () => {
             </div>
         </div>
         <button
-        data-name="${item.name}"
+        data-id="${item.id}"
         aria-label="Remove ${item.name} from cart"
         class="cart-remove-item"
         >
@@ -147,7 +147,7 @@ const displayProducts = (products) => {
     const productEl = document.createElement("div");
 
     productEl.classList.add("product", "grid-item");
-    productEl.setAttribute("data-name", product.name);
+    productEl.setAttribute("data-id", product.id);
 
     productEl.innerHTML = `           
             <picture>
@@ -168,7 +168,7 @@ const displayProducts = (products) => {
             <p class="product-category">${product.category}</p>
             <h2 class="product-name">${product.name}</h2>
             <p class="product-price">$${product.price.toFixed(2)}</p>
-            <button data-name="${product.name}" class="add-to-cart cart-control">
+            <button class="add-to-cart cart-control">
               <img
                 aria-hidden="true"
                 focusable="false"
@@ -253,12 +253,12 @@ productsContainer.addEventListener("click", (e) => {
     const productCard = getProductCard(addToCartBtn);
     const quantityEl = getQuantityEl(productCard);
     const decrementBtn = productCard.querySelector(".decrement-quantity-btn");
-    const productName = productCard.dataset.name;
+    const productId = Number(productCard.dataset.id);
 
     productCard.classList.add("selected");
     quantityEl.textContent = 1;
     decrementBtn.focus();
-    cart.addItem(productName);
+    cart.addItem(productId);
     updateCart();
     if (!cartSection.classList.contains("filled-cart")) {
       cartSection.classList.add("filled-cart");
@@ -270,10 +270,10 @@ productsContainer.addEventListener("click", (e) => {
     const productCard = getProductCard(decreaseBtn);
     const quantityEl = getQuantityEl(productCard);
     const addToCartEl = productCard.querySelector(".add-to-cart");
-    const productName = productCard.dataset.name;
+    const productId = Number(productCard.dataset.id);
 
-    cart.updateQuantity(productName);
-    let item = getCartItem(productName);
+    cart.updateQuantity(productId);
+    let item = getCartItem(productId);
     if (!item) {
       productCard.classList.remove("selected");
       addToCartEl.focus();
@@ -290,10 +290,10 @@ productsContainer.addEventListener("click", (e) => {
   if (increaseBtn) {
     const productCard = getProductCard(increaseBtn);
     const quantityEl = getQuantityEl(productCard);
-    const productName = productCard.dataset.name;
+    const productId = Number(productCard.dataset.id);
 
-    cart.addItem(productName);
-    const item = getCartItem(productName);
+    cart.addItem(productId);
+    const item = getCartItem(productId);
     quantityEl.textContent = item.qty;
     updateCart();
     return;
@@ -304,10 +304,10 @@ cartSection.addEventListener("click", (e) => {
   const removeItemBtn = e.target.closest(".cart-remove-item");
 
   if (removeItemBtn) {
-    const itemName = removeItemBtn.dataset.name;
-    const productCard = document.querySelector(`[data-name="${itemName}"]`);
+    const itemId = Number(removeItemBtn.dataset.id);
+    const productCard = document.querySelector(`[data-id="${itemId}"]`);
 
-    cart.removeItem(itemName);
+    cart.removeItem(itemId);
     productCard.classList.remove("selected");
     updateCart();
     if (cart.items.length <= 0) {
