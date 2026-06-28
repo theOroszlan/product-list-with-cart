@@ -375,9 +375,6 @@ button {
  * ORDER CONFIRMED
  ========================*/
 .order-confirmed {
-  display: grid;
-  gap: var(--space-sm);
-
   background-color: var(--rose-50);
   width: min(100%, 26rem);
   border: none;
@@ -389,12 +386,17 @@ button {
   transform: translate(-50%);
 }
 
+.order-confirmed[open] {
+  display: grid;
+  gap: var(--space-sm);
+}
+
 .order-confirmed-image {
   width: 40px;
   height: 40px;
 }
 
-.order-confirmed-title {
+#order-confirmed-title {
   color: var(--rose-900);
   font-size: 2rem;
   font-weight: var(--weight-700);
