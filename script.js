@@ -102,6 +102,11 @@ const getCartItem = (id) => {
   return cart.items.find((item) => item.id === id);
 };
 
+const updateProductQuantity = (qtyEl, productId) => {
+  let item = getCartItem(productId);
+  qtyEl.textContent = item?.qty ?? 0;
+};
+
 const updateCart = () => {
   const items = cart.items;
   const total = cart.calculateTotalPrice();
@@ -297,9 +302,9 @@ productsContainer.addEventListener("click", (e) => {
     const productId = Number(productCard.dataset.id);
 
     productCard.classList.add("selected");
-    quantityEl.textContent = 1;
     decrementBtn.focus();
     cart.addItem(productId);
+    updateProductQuantity(quantityEl, productId);
     updateCart();
     if (!cartSection.classList.contains("filled-cart")) {
       cartSection.classList.add("filled-cart");
@@ -319,7 +324,7 @@ productsContainer.addEventListener("click", (e) => {
       productCard.classList.remove("selected");
       addToCartEl.focus();
     }
-    quantityEl.textContent = item?.qty ?? 0;
+    updateProductQuantity(quantityEl, productId);
     updateCart();
 
     if (cart.items.length <= 0) {
@@ -334,8 +339,7 @@ productsContainer.addEventListener("click", (e) => {
     const productId = Number(productCard.dataset.id);
 
     cart.addItem(productId);
-    const item = getCartItem(productId);
-    quantityEl.textContent = item.qty;
+    updateProductQuantity(quantityEl, productId);
     updateCart();
     return;
   }
@@ -352,7 +356,7 @@ cartSection.addEventListener("click", (e) => {
 
     cart.removeItem(itemId);
     productCard.classList.remove("selected");
-    quantityEl.textContent = 0;
+    updateProductQuantity(quantityEl, itemId);
     updateCart();
     if (cart.items.length <= 0) {
       cartSection.classList.remove("filled-cart");
@@ -378,8 +382,9 @@ orderConfirmed.addEventListener("click", (e) => {
   productCards.forEach((card) => {
     card.classList.remove("selected");
     const quantityEl = getQuantityEl(card);
+    const productId = Number(card.dataset.id);
 
-    quantityEl.textContent = 0;
+    updateProductQuantity(quantityEl, productId);
   });
   updateCart();
   cartSection.classList.remove("filled-cart");
