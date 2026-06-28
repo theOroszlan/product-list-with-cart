@@ -51,6 +51,45 @@
           <button class="order-btn">Confirm Order</button>
         </div>
       </section>
+      <dialog
+        class="order-confirmed"
+        aria-labelledby="order-confirmed-title"
+        open=""
+      >
+        <img
+          src="./assets/images/icon-order-confirmed.svg"
+          alt=""
+          aria-hidden="true"
+          class="order-confirmed-image"
+        />
+        <div>
+          <h2 class="order-confirmed-title">Order Confirmed</h2>
+          <p class="order-confirmed-text">We hope you enjoy your food!</p>
+        </div>
+        <div class="order-summary">
+          <ul class="order-summary-grid">
+            <li class="order-summary-item">
+              <div class="order-item-details-wrapper">
+                <img src="./assets/images/image-baklava-thumbnail.jpg" alt="" />
+                <div class="order-item-details">
+                  <h3 class="order-item-name">Vanilla Bean</h3>
+                  <div>
+                    <span class="order-item-quantity">4x</span>
+                    <span class="order-item-price">$5.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <span class="order-item-total-price">$5.00</span>
+            </li>
+          </ul>
+          <div class="order-total">
+            <p>Order Total</p>
+            <p class="order-total-price">$67.00</p>
+          </div>
+        </div>
+        <button class="order-btn">Start New Order</button>
+      </dialog>
     </main>
 
     <footer class="attribution">

@@ -60,6 +60,8 @@ body {
 }
 
 main {
+  position: relative;
+
   display: grid;
   place-items: center;
   gap: var(--space-lg);
@@ -366,6 +368,97 @@ button {
     background-color: hsl(14, 86%, 28%);
     transform: translateY(0);
   }
+}
+
+/* ===================
+ * ORDER CONFIRMED
+ ========================*/
+.order-confirmed {
+  display: grid;
+  gap: var(--space-sm);
+
+  width: min(100%, 26rem);
+  border: none;
+  border-radius: 1rem;
+  padding: var(--space-sm);
+
+  top: max(5rem, 15vw);
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.order-confirmed-image {
+  width: 40px;
+  height: 40px;
+}
+
+.order-confirmed-title {
+  color: var(--rose-900);
+  font-size: 2rem;
+  font-weight: var(--weight-700);
+}
+
+.order-confirmed-text {
+  color: var(--rose-300);
+  font-size: 1em;
+}
+
+.order-summary {
+  display: grid;
+  gap: var(--space-md);
+
+  background-color: var(--rose-100);
+  padding: var(--space-sm);
+}
+
+.order-summary-grid {
+  display: grid;
+  gap: var(--space-sm);
+
+  padding: 0;
+}
+
+.order-summary-item {
+  list-style: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-item-details-wrapper {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.order-item-details > div {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.order-item-details-wrapper > img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.order-item-name {
+  color: var(--rose-900);
+  font-size: 1rem;
+}
+
+.order-item-quantity {
+  font-weight: var(--weight-600);
+  color: var(--red);
+}
+
+.order-item-price {
+  color: var(--rose-500);
+}
+
+.order-item-total-price {
+  font-weight: var(--weight-600);
+  color: var(--rose-900);
 }
 
 /*=================
