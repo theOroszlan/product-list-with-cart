@@ -54,7 +54,7 @@
 
 body {
   font-family: "Red Hat Text", sans-serif;
-  background-color: var(--rose-50);
+  background-color: var(--rose-100);
 
   container-type: inline-size;
 }
@@ -101,10 +101,6 @@ button {
   gap: 0.25rem;
 
   position: relative;
-}
-
-.product-image-wrapper {
-  border-radius: 0.5rem;
 }
 
 .product-image {
@@ -224,7 +220,7 @@ button {
   ========================*/
 
 .cart {
-  background-color: #fff;
+  background-color: var(--rose-50);
   color: var(--red);
   width: min(100%, 350px);
   padding: var(--space-md);
@@ -266,7 +262,7 @@ button {
 }
 
 .cart-item-name {
-  color: var(--rose-500);
+  color: var(--rose-900);
   font-size: 1rem;
 }
 
@@ -319,13 +315,13 @@ button {
 }
 
 .order-total > p:first-child {
-  color: var(--rose-500);
+  color: var(--rose-900);
 }
 
 .order-total-price {
   color: var(--rose-900);
   font-size: 1.25rem;
-  font-weight: var(--weight-600);
+  font-weight: var(--weight-700);
 }
 
 .carbon-neutral {
@@ -377,6 +373,7 @@ button {
   display: grid;
   gap: var(--space-sm);
 
+  background-color: var(--rose-50);
   width: min(100%, 26rem);
   border: none;
   border-radius: 1rem;
@@ -399,7 +396,7 @@ button {
 }
 
 .order-confirmed-text {
-  color: var(--rose-300);
+  color: var(--rose-500);
   font-size: 1em;
 }
 
