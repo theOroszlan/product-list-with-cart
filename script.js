@@ -104,11 +104,11 @@ const updateCart = () => {
     itemEl.classList.add("cart-item");
 
     itemEl.innerHTML = `
-        <div class="cart-item-details">
-            <h3 class="cart-item-name">${item.name}</h3>
+        <div class="cart-item-details item-details">
+            <h3 class="cart-item-name item-name">${item.name}</h3>
             <div>
-                <span class="cart-item-quantity">${item.qty}x</span>
-                <span class="cart-item-price">@$${item.price.toFixed(2)}</span>
+                <span class="cart-item-quantity item-quantity">${item.qty}x</span>
+                <span class="cart-item-price item-price">@$${item.price.toFixed(2)}</span>
                 <span class="cart-item-total-price">${item.totalPrice.toFixed(2)}</span>
             </div>
         </div>
