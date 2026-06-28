@@ -55,6 +55,7 @@
 body {
   font-family: "Red Hat Text", sans-serif;
   background-color: var(--rose-100);
+  min-width: 375px;
 
   container-type: inline-size;
 }
@@ -66,8 +67,6 @@ main {
   place-items: center;
   gap: var(--space-lg);
   padding: var(--space-lg);
-
-  min-width: 375px;
 }
 
 button {
@@ -92,7 +91,7 @@ button {
 
 .products-grid {
   display: grid;
-  gap: var(--space-sm);
+  gap: var(--space-md);
   grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
 }
 
@@ -381,7 +380,7 @@ button {
   border-radius: 1rem;
   padding: var(--space-sm);
 
-  top: max(5rem, 15vw);
+  top: max(5rem, 10vw);
   left: 50%;
   transform: translate(-50%);
 }
