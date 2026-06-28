@@ -114,11 +114,11 @@ const updateCart = () => {
     itemEl.classList.add("cart-item");
 
     itemEl.innerHTML = `
-        <div class="cart-item-details item-details">
-            <h3 class="cart-item-name item-name">${item.name}</h3>
+        <div class="item-details">
+            <h3 class="item-name">${item.name}</h3>
             <div>
-                <span class="cart-item-quantity item-quantity">${item.qty}x</span>
-                <span class="cart-item-price item-price">@$${item.price.toFixed(2)}</span>
+                <span class="item-quantity">${item.qty}x</span>
+                <span class="item-price">@$${item.price.toFixed(2)}</span>
                 <span class="cart-item-total-price">${item.totalPrice.toFixed(2)}</span>
             </div>
         </div>
@@ -164,11 +164,11 @@ const displayOrderSummary = () => {
     itemEl.innerHTML = `
       <div class="order-item-details-wrapper">
         <img src="${item.image}" alt="" />
-        <div class="order-item-details item-details">
-          <h3 class="order-item-name item-name">${item.name}</h3>
+        <div class="item-details">
+          <h3 class="item-name">${item.name}</h3>
           <div>
-            <span class="order-item-quantity item-quantity">${item.qty}x</span>
-            <span class="order-item-price item-price">$${item.price.toFixed(2)}</span>
+            <span class="item-quantity">${item.qty}x</span>
+            <span class="item-price">$${item.price.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -187,7 +187,7 @@ const displayProducts = (products) => {
   products.forEach((product) => {
     const productEl = document.createElement("div");
 
-    productEl.classList.add("product", "grid-item");
+    productEl.classList.add("product");
     productEl.setAttribute("data-id", product.id);
 
     productEl.innerHTML = `           
