@@ -11,8 +11,6 @@ This is a solution to the [Product list with cart challenge on Frontend Mentor](
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
@@ -30,21 +28,28 @@ Users should be able to:
 
 ### Screenshot
 
+![](./assets/images/Screenshot.png)
+
 ### Links
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS
-- JavaScript
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- Vanilla JavaScript
 
 ### What I learned
 
-### Continued development
-
-### Useful resources
+- Event delegation for handling dynamic elements
+- Using a central state (Cart class) to update the UI
 
 ## Author
 
