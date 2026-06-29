@@ -107,7 +107,56 @@ const updateProductQuantity = (qtyEl, productId) => {
   qtyEl.textContent = item?.qty ?? 0;
 };
 
-const updateCart = () => {
+const updateCartItem = (id) => {
+  const cartItem = cartItemsEl.querySelector(`.cart-item[data-id="${id}"]`);
+  if (!cartItem) {
+    return;
+  }
+
+  const itemQty = cartItem.querySelector(".item-quantity");
+  const itemTotalPrice = cartItem.querySelector(".cart-item-total-price");
+
+  let item = getCartItem(id);
+  const total = cart.calculateTotalPrice();
+  const count = cart.getNumItems();
+
+  itemQty.textContent = `${item.qty}x`;
+  itemTotalPrice.textContent = item.totalPrice.toFixed(2);
+  cartCountEl.textContent = count;
+  orderTotalEl.textContent = `$${total.toFixed(2)}`;
+};
+
+const displayOrderSummary = () => {
+  const items = cart.items;
+  const total = cart.calculateTotalPrice();
+
+  orderSummaryEl.innerHTML = "";
+
+  items.forEach((item) => {
+    const itemEl = document.createElement("li");
+    itemEl.classList.add("order-summary-item");
+
+    itemEl.innerHTML = `
+      <div class="order-item-details-wrapper">
+        <img src="${item.image}" alt="" />
+        <div class="item-details">
+          <h3 class="item-name">${item.name}</h3>
+          <div>
+            <span class="item-quantity">${item.qty}x</span>
+            <span class="item-price">$${item.price.toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="order-item-total-price">$${item.totalPrice.toFixed(2)}</span>`;
+
+    orderSummaryEl.appendChild(itemEl);
+  });
+
+  orderConfirmedPrice.textContent = `$${total.toFixed(2)}`;
+};
+
+const renderCart = () => {
   const items = cart.items;
   const total = cart.calculateTotalPrice();
   const count = cart.getNumItems();
@@ -117,6 +166,7 @@ const updateCart = () => {
   items.forEach((item) => {
     const itemEl = document.createElement("li");
     itemEl.classList.add("cart-item");
+    itemEl.setAttribute("data-id", item.id);
 
     itemEl.innerHTML = `
         <div class="item-details">
@@ -153,37 +203,6 @@ const updateCart = () => {
 
   cartCountEl.textContent = count;
   orderTotalEl.textContent = `$${total.toFixed(2)}`;
-};
-
-const displayOrderSummary = () => {
-  const items = cart.items;
-  const total = cart.calculateTotalPrice();
-  const count = cart.getNumItems();
-
-  orderSummaryEl.innerHTML = "";
-
-  items.forEach((item) => {
-    const itemEl = document.createElement("li");
-    itemEl.classList.add("order-summary-item");
-
-    itemEl.innerHTML = `
-      <div class="order-item-details-wrapper">
-        <img src="${item.image}" alt="" />
-        <div class="item-details">
-          <h3 class="item-name">${item.name}</h3>
-          <div>
-            <span class="item-quantity">${item.qty}x</span>
-            <span class="item-price">$${item.price.toFixed(2)}</span>
-          </div>
-        </div>
-      </div>
-
-      <span class="order-item-total-price">$${item.totalPrice.toFixed(2)}</span>`;
-
-    orderSummaryEl.appendChild(itemEl);
-  });
-
-  orderConfirmedPrice.textContent = `$${total.toFixed(2)}`;
 };
 
 const displayProducts = (products) => {
@@ -305,10 +324,8 @@ productsContainer.addEventListener("click", (e) => {
     decrementBtn.focus();
     cart.addItem(productId);
     updateProductQuantity(quantityEl, productId);
-    updateCart();
-    if (!cartSection.classList.contains("filled-cart")) {
-      cartSection.classList.add("filled-cart");
-    }
+    renderCart();
+    cartSection.classList.add("filled-cart");
     return;
   }
 
@@ -323,13 +340,17 @@ productsContainer.addEventListener("click", (e) => {
     if (!item) {
       productCard.classList.remove("selected");
       addToCartEl.focus();
+      updateProductQuantity(quantityEl, productId);
+      renderCart();
+
+      if (cart.items.length <= 0) {
+        cartSection.classList.remove("filled-cart");
+      }
+      return;
     }
     updateProductQuantity(quantityEl, productId);
-    updateCart();
+    updateCartItem(productId);
 
-    if (cart.items.length <= 0) {
-      cartSection.classList.remove("filled-cart");
-    }
     return;
   }
 
@@ -340,7 +361,7 @@ productsContainer.addEventListener("click", (e) => {
 
     cart.addItem(productId);
     updateProductQuantity(quantityEl, productId);
-    updateCart();
+    updateCartItem(productId);
     return;
   }
 });
@@ -351,13 +372,13 @@ cartSection.addEventListener("click", (e) => {
 
   if (removeItemBtn) {
     const itemId = Number(removeItemBtn.dataset.id);
-    const productCard = document.querySelector(`[data-id="${itemId}"]`);
+    const productCard = document.querySelector(`.product[data-id="${itemId}"]`);
     const quantityEl = getQuantityEl(productCard);
 
     cart.removeItem(itemId);
     productCard.classList.remove("selected");
     updateProductQuantity(quantityEl, itemId);
-    updateCart();
+    renderCart();
     if (cart.items.length <= 0) {
       cartSection.classList.remove("filled-cart");
     }
@@ -386,7 +407,7 @@ orderConfirmed.addEventListener("click", (e) => {
 
     updateProductQuantity(quantityEl, productId);
   });
-  updateCart();
+  renderCart();
   cartSection.classList.remove("filled-cart");
   orderConfirmed.close();
 });
