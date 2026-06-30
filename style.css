@@ -457,8 +457,8 @@ button {
 
 @container (width > 848px) {
   main {
-    grid-template-columns: 1fr min(32vw, 350px);
+    grid-template-columns: 1fr min(32vw, 360px);
     align-items: start;
-    padding-inline: 5vw;
+    padding-inline: 9vw;
   }
 }
