@@ -455,7 +455,7 @@ button {
   color: hsl(228, 45%, 44%);
 }
 
-@container (width > 848px) {
+@container (width > 920px) {
   main {
     grid-template-columns: 1fr min(32vw, 360px);
     align-items: start;
