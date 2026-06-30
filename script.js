@@ -178,6 +178,7 @@ const renderCart = () => {
             </div>
         </div>
         <button
+        type="button"
         data-id="${item.id}"
         aria-label="Remove ${item.name} from cart"
         class="cart-remove-item"
@@ -233,7 +234,7 @@ const displayProducts = (products) => {
             <p class="product-category">${product.category}</p>
             <h2 class="product-name">${product.name}</h2>
             <p class="product-price">$${product.price.toFixed(2)}</p>
-            <button class="add-to-cart cart-control">
+            <button class="add-to-cart cart-control" type="button">
               <img
                 aria-hidden="true"
                 focusable="false"
@@ -245,6 +246,7 @@ const displayProducts = (products) => {
               <button
                 aria-label="Decrease ${product.name} quantity"
                 class="quantity-btn decrement-quantity-btn"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -264,6 +266,7 @@ const displayProducts = (products) => {
               <button
                 aria-label="Increase ${product.name} quantity"
                 class="quantity-btn increment-quantity-btn"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
