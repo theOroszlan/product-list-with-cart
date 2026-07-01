@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Product list with cart solution](https://www.frontendmentor.io/solutions/responsive-product-list-with-cart-built-using-html-css-and-js-GoPc7iFVSv)
 - Live Site URL: [Product list with cart](https://theoroszlan.github.io/product-list-with-cart/)
 
 ## My process
